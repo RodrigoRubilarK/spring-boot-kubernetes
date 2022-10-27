@@ -45,6 +45,11 @@ stages:
         sqMavenPluginVersionChoice: 'latest'
         spotBugsRunAnalysis: true
 
+- task: sonarcloud-buildbreaker@2
+  inputs:
+    SonarCloud: 'Sonarcloud'
+    organization: 'rodrigorubilark'
+
 - stage: SCA 
   jobs:
   - job: SCA
