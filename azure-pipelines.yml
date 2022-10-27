@@ -43,3 +43,4 @@ stages:
         effectivePomSkip: false
         sonarQubeRunAnalysis: true
         sqMavenPluginVersionChoice: 'latest'
+        spotBugsRunAnalysis: true
