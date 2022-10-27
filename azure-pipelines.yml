@@ -7,10 +7,10 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
--stage: SAST
+- stage: SAST
 jobs:
 - jobs: SAST
-displayName: 'SCA'
+  displayName: 'SAST'
 steps:
 - task: Maven@4
   inputs:
