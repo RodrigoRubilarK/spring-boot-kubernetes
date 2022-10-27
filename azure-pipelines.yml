@@ -45,8 +45,8 @@ stages:
         sqMavenPluginVersionChoice: 'latest'
         spotBugsRunAnalysis: true
 
-      - task: sonarcloud-buildbreaker@2
-        inputs:
+    - task: sonarcloud-buildbreaker@2
+      inputs:
           SonarCloud: 'Sonarcloud'
           organization: 'rodrigorubilark'
 
