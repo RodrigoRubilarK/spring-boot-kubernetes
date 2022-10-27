@@ -9,37 +9,37 @@ pool:
 stages:
 - stage: SAST
   jobs:
-  - jobs: SAST
-  displayName: 'SAST'
-  steps:
-  - task: Maven@4
-    inputs:
-      mavenPomFile: 'pom.xml'
-      publishJUnitResults: true
-      testResultsFiles: '**/surefire-reports/TEST-*.xml'
-      javaHomeOption: 'JDKVersion'
-      mavenVersionOption: 'Default'
-      mavenAuthenticateFeed: false
-      effectivePomSkip: false
-      sonarQubeRunAnalysis: false
+  - job: SAST
+    displayName: 'SAST'
+    steps:
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
 
-  - task: SonarCloudPrepare@1
-    inputs:
-      SonarCloud: 'Sonarcloud'
-      organization: 'rodrigorubilark'
-      projectKey: 'RodrigoRubilarK_spring-boot-kubernetes'
-      projectName: 'spring-boot-kubernetes'
+    - task: SonarCloudPrepare@1
+      inputs:
+        SonarCloud: 'Sonarcloud'
+        organization: 'rodrigorubilark'
+        projectKey: 'RodrigoRubilarK_spring-boot-kubernetes'
+        projectName: 'spring-boot-kubernetes'
 
-  - task: Maven@4
-    inputs:
-      mavenPomFile: 'pom.xml'
-      goals: 'clean verify sonar:sonar'
-      publishJUnitResults: true
-      testResultsFiles: '**/surefire-reports/TEST-*.xml'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.11'
-      mavenVersionOption: 'Default'
-      mavenAuthenticateFeed: false
-      effectivePomSkip: false
-      sonarQubeRunAnalysis: true
-      sqMavenPluginVersionChoice: 'latest'
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml'
+        goals: 'clean verify sonar:sonar'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.11'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: true
+        sqMavenPluginVersionChoice: 'latest'
