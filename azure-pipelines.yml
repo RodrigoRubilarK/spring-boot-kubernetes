@@ -9,7 +9,7 @@ pool:
 stages: SAST
 jobs:
 - jobs: SAST
-displayName: 'SAST'
+displayName: 'SCA'
 steps:
 - task: Maven@4
   inputs:
