@@ -6,7 +6,8 @@
 pool:
   vmImage: ubuntu-latest
 
-stages: SAST
+stages:
+-stage: SAST
 jobs:
 - jobs: SAST
 displayName: 'SCA'
