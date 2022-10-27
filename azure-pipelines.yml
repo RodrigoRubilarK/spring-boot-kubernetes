@@ -7,15 +7,16 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: Gradle@3
-  inputs:
-    gradleWrapperFile: 'gradlew'
-    tasks: 'build'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    sonarQubeRunAnalysis: false
-    spotBugsAnalysis: false
+- task: Maven@4
+   inputs:
+     mavenPomFile: 'pom.xml'
+     publishJUnitResults: true
+     testResultsFiles: '**/surefire-reports/TEST-*.xml'
+     javaHomeOption: 'JDKVersion'
+     mavenVersionOption: 'Default'
+     mavenAuthenticateFeed: false
+     effectivePomSkip: false
+     sonarQubeRunAnalysis: false
 
 - task: SonarCloudPrepare@1
   inputs:
@@ -24,14 +25,16 @@ steps:
     projectKey: 'RodrigoRubilarK_spring-boot-kubernetes'
     projectName: 'spring-boot-kubernetes'
 
-- task: Gradle@3
+- task: Maven@4
   inputs:
-    gradleWrapperFile: 'gradlew'
-    tasks: 'sonarqube'
+    mavenPomFile: 'pom.xml'
+    goals: 'clean verify sonar:sonar'
     publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
     sonarQubeRunAnalysis: true
-    sqGradlePluginVersionChoice: 'specify'
-    sonarQubeGradlePluginVersion: '3.3'
-    spotBugsAnalysis: false
+    sqMavenPluginVersionChoice: 'latest'
